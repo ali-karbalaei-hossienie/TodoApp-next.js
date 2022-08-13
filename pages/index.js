@@ -13,6 +13,7 @@ export default function Home() {
     const fetcher = async () => {
       try {
         const { data } = await axios.get("/api/todos");
+        console.log(data);
         setLoading(false);
         setTodos(data);
       } catch (err) {
@@ -37,15 +38,16 @@ export default function Home() {
   const DeleteHandler = async (id) => {
     try {
       const { data } = await axios.delete(`/api/todos/${id}`);
-      setTodos(data);
+      setTodos(xx);
     } catch (err) {
       setErr(err.message);
     }
   };
 
-  const AddNewTodo = async (e, value) => {
+  const AddNewTodo = async (e, formData) => {
+    console.log(formData);
     e.preventDefault();
-    const { data } = await axios.post(`/api/todos`, { value });
+    const { data } = await axios.post(`/api/todos`, { formData });
     setTodos(data);
   };
   return (
